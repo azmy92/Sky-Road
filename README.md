@@ -1,8 +1,8 @@
 Sky-Road
 ========
 
-A  simple 3D survival game implemented Using OpenGL 3.1, which inculudes the following
- - Phong Fragment Shading
+A  simple 3D survival game is implemented Using OpenGL 3.1, which includes the following
+ - Gouraud Shading
  - Texture Mapping
  - Prespective Projection
 
