@@ -89,7 +89,7 @@ Model *ModelPool[MODEL_POOL_SIZE];
 bool taken[MODEL_POOL_SIZE];
 int ModelPoolPointer = 0;
 vector<int> lastSceneModelsPos;
-Model *tayra = new Model();
+Model *jetPlane= new Model();
 
 //cube vertices
 static GLfloat g_vertex_buffer_data[] = {
@@ -934,22 +934,22 @@ void init(void) {
 	uniFormAngles= glGetUniformLocation(program, "angles");
 
 
-	//tayra init vectors
-	tayra->scale = vec3(0.5, 0.5, 0.5);
-	tayra->pos = vec3(0, 0.375, farRenderZ);
-	yCountDown = tayra->pos.y;
-	yCountUp = tayra->pos.y;
-	tayra->angles = vec3(0.0,0.0,0.0);
+	//jetPlane init vectors
+	jetPlane->scale = vec3(0.5, 0.5, 0.5);
+	jetPlane->pos = vec3(0, 0.375, farRenderZ);
+	yCountDown = jetPlane->pos.y;
+	yCountUp = jetPlane->pos.y;
+	jetPlane->angles = vec3(0.0,0.0,0.0);
 	intializeModels();
 	glClearColor(0.0, 0.0, 0.0, 1.0);		// white background
 
 }
 
-bool checkOnSurface() {		// check that tayra is on surface of the map
-	float tayraXLeft = tayra->pos.x - 0.125;
-	float tayraXRight = tayra->pos.x + 0.125;
-	float tayraZBack = tayra->pos.z - 0.125;
-	float tayraZFront = tayra->pos.z + 0.125;
+bool checkOnSurface() {		// check that jetPlaneis on surface of the map
+	float tayraXLeft = jetPlane->pos.x - 0.125;
+	float tayraXRight = jetPlane->pos.x + 0.125;
+	float tayraZBack = jetPlane->pos.z - 0.125;
+	float tayraZFront = jetPlane->pos.z + 0.125;
 	bool flag = false;
 	if (isFalling == false) {
 		for (int i = 0; i < models.size(); i++) {
@@ -994,7 +994,7 @@ void special_keys(int key, int x, int y) {
 		}
 	}
 	if(isFalling && key == 	GLUT_KEY_DOWN){
-					//tayra->pos.y = 0.375;
+					//jetPlane->pos.y = 0.375;
 					//isFalling = false;
 
 	}
@@ -1058,7 +1058,7 @@ void display(void) {
 
 	}
 
-	glUniform3f(uniCubeScale, tayra->scale.x, tayra->scale.y, tayra->scale.z);
+	glUniform3f(uniCubeScale, jetPlane->scale.x, jetPlane->scale.y, jetPlane->scale.z);
 	bool flag = checkOnSurface();
 	if (jumpState) {			//animation of jump
 		jumpCounter++;
@@ -1068,7 +1068,7 @@ void display(void) {
 			yCountUp = yCountUp - 0.01;
 		} else if (jumpCounter > 80) {
 			jumpCounter = 0;
-			yCountUp = tayra->pos.y;
+			yCountUp = jetPlane->pos.y;
 			jumpState = false;
 		}
 	}
@@ -1077,36 +1077,36 @@ void display(void) {
 		if (jumpCounter < 70) {
 			yCountUp = yCountUp + 0.008;
 			if (rightJump) {
-				tayra->angles.z -= 0.75;
-				tayra->pos.x = tayra->pos.x - 0.01;
+				jetPlane->angles.z -= 0.75;
+				jetPlane->pos.x = jetPlane->pos.x - 0.01;
 			} else if (leftJump) {
-				tayra->pos.x = tayra->pos.x + 0.01;
-				tayra->angles.z += 0.75;
+				jetPlane->pos.x = jetPlane->pos.x + 0.01;
+				jetPlane->angles.z += 0.75;
 			}
 
 		} else if (jumpCounter > 70 && jumpCounter <= 140) {
 			if (rightJump) {
-					tayra->angles.z += 0.75;
+					jetPlane->angles.z += 0.75;
 			} else if (leftJump) {
-				tayra->angles.z -= 0.75;
+				jetPlane->angles.z -= 0.75;
 			}
 			yCountUp = yCountUp - 0.008;
 		} else if (jumpCounter > 140) {
 			jumpCounter = 0;
-			yCountUp = tayra->pos.y;
+			yCountUp = jetPlane->pos.y;
 			rightJump = false;
 			leftJump = false;
 		}
 	}
-	if (!flag && !jumpState && !rightJump) {	//check if the tayra on surface
+	if (!flag && !jumpState && !rightJump) {	//check if the jetPlane on surface
 		yCountDown = yCountDown - 0.005;
-		glUniform3f(uniCubeTranslations, tayra->pos.x, yCountDown,
-				tayra->pos.z);
-		//if (counter > 20) {	//isFalling is a bool to stop checking the surface if the tayra is already fall we used here a counter because in the beginning the flag is=0 before initialize the map
+		glUniform3f(uniCubeTranslations, jetPlane->pos.x, yCountDown,
+				jetPlane->pos.z);
+		//if (counter > 20) {	//isFalling is a bool to stop checking the surface if the jetPlane is already fall we used here a counter because in the beginning the flag is=0 before initialize the map
 		isFalling = true;
 		//}
 	} else {
-		glUniform3f(uniCubeTranslations, tayra->pos.x, yCountUp, tayra->pos.z);
+		glUniform3f(uniCubeTranslations, jetPlane->pos.x, yCountUp, jetPlane->pos.z);
 	}
 	glUniform2f(uniformDrawingPlane, 100.0, 100.0);
 	////////////////////////////////////////
@@ -1124,7 +1124,7 @@ void display(void) {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, p_Texture);
 
-	glUniform3f(uniFormAngles, tayra->angles.x, tayra->angles.y, tayra->angles.z);
+	glUniform3f(uniFormAngles, jetPlane->angles.x, jetPlane->angles.y, jetPlane->angles.z);
 	glDrawArrays(GL_TRIANGLES, 0, p_vertices.size());
 
 	//////////////////////////////////////////
