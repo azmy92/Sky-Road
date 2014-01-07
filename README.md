@@ -10,9 +10,9 @@ A  simple 3D survival game is implemented Using OpenGL 3.1, which includes the f
 
 snap shoots
 -----------
-![ScreenShot](https://github.com/azmy92/Sky-Road/blob/master/sky1.jpg?raw=true)
+![ScreenShot](http://github.com/azmy92/Sky-Road/blob/master/sky1.jpg?raw=true)
 
-![ScreenShot](https://github.com/azmy92/Sky-Road/blob/master/sky2.jpg?raw=true)
+![ScreenShot](http://github.com/azmy92/Sky-Road/blob/master/sky2.jpg?raw=true)
 
 Tech
 ----
